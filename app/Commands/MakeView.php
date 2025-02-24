@@ -9,25 +9,29 @@ class MakeView extends BaseCommand
 {
     protected $group = 'custom';
     protected $name = 'make:view';
-    protected $description = 'Membuat file view baru di folder app/Views';
+    protected $description = 'Generate a new view file';
 
     public function run(array $params)
     {
-        // Ambil nama view dari parameter
         $viewName = $params[0] ?? null;
 
         if (!$viewName) {
-            CLI::error('Silakan berikan nama view! Contoh: php spark make:view home');
+            CLI::error('Please provide a view name. Example: php spark make:view admin.dashboard');
             return;
         }
 
-        // Path file view yang akan dibuat
-        // $viewPath = APPPATH . "Views/{$viewName}.php";
+        // Konversi titik (.) menjadi slash (/) untuk mendukung subfolder
         $viewPath = APPPATH . "Views/" . str_replace('.', '/', $viewName) . ".php";
 
+        // Buat folder jika belum ada
+        $directory = dirname($viewPath);
+        if (!is_dir($directory)) {
+            mkdir($directory, 0777, true); // true untuk recursive directory creation
+        }
 
+        // Cek apakah file sudah ada
         if (file_exists($viewPath)) {
-            CLI::error("View '{$viewName}.php' sudah ada!");
+            CLI::error("View '{$viewName}.php' already exists!");
             return;
         }
 
@@ -52,6 +56,6 @@ class MakeView extends BaseCommand
         // Simpan file baru
         file_put_contents($viewPath, $template);
 
-        CLI::write("View '{$viewName}.php' berhasil dibuat di app/Views/", 'green');
+        CLI::write("View '{$viewName}.php' created successfully!", 'green');
     }
 }
