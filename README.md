@@ -3,7 +3,6 @@
 ## Description
 
 Dibuat untuk pembelajaran CodeIgniter 4.
-referensi dari youtube channel "Padang Tekno" [Aplikasi Penjualan Kasir Codeigniter 4](https://www.youtube.com/playlist?list=PLYfaT5HP5yRph5eYRiEdTBm2YqHE3z51S).
 
 silakan dikembangkan dan digunakan untuk tujuan positif.
 
@@ -56,3 +55,7 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 
 pada project ini telah ditambahkan fitur untuk membuat view menggunakan php spark, seperti contoh berikut;
 `php spark make:view admin.dashboard` untuk membuat view admin/dashboard.php
+
+## Reference
+
+- youtube channel "Padang Tekno" [Aplikasi Penjualan Kasir Codeigniter 4](https://www.youtube.com/playlist?list=PLYfaT5HP5yRph5eYRiEdTBm2YqHE3z51S).
