@@ -11,13 +11,14 @@ use Firebase\JWT\JWT;
 class AuthController extends ResourceController
 {
 
-    public function login(){
+    public function login()
+    {
         $model = new UserModel();
-        
+
         $email = $this->request->getPost('email');
         $password = $this->request->getPost('password');
         $user = $model->where('email', $email)->first();
-        if(!$user || !password_verify($password, $user['password'])){
+        if (!$user || !password_verify($password, $user['password'])) {
             return $this->failUnauthorized('Email atau password salah');
         }
         $key = getenv('JWT_SECRET_KEY');
@@ -26,8 +27,8 @@ class AuthController extends ResourceController
             'email' => $user['email'],
             'name' => $user['name'],
             'iat' => time(),
-            'exp' => time() + (60 * 60), // Token berlaku 1 jam
-            
+            'exp' => time() + (60 * 60 * 24), // Token berlaku 1 hari
+
         ];
         $token = JWT::encode($payload, $key, 'HS256');
         return $this->respond(['token' => $token]);
